@@ -1,0 +1,18 @@
+# Build output
+target/
+*.class
+
+# Logs written by the application
+logs/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+nbproject/private/
+nbbuild/
+nbdist/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,8 @@
+File A,File B,Intended relationship,Intended outcome (MOCK)
+Alice_Factorial.java,Bob_Factorial.java,Renamed copy,Should be flagged
+Dan_Palindrome.java,Eve_Palindrome.java,Renamed and reordered copy,Should be flagged
+Gina_BankAccount.java,Hank_BankAccount.java,Renamed copy,Should be flagged
+Gina_BankAccount.java,Kim_Library.java,Partial copy,Borderline - worth a look
+Alice_Factorial.java,Carol_Factorial.java,Independent solution,Should not be flagged
+Dan_Palindrome.java,Frank_Palindrome.java,Independent solution,Should not be flagged
+Ivy_Grades.java,Jake_FizzBuzz.java,Unrelated,Should not be flagged
