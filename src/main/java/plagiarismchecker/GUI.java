@@ -252,7 +252,7 @@ public class GUI {
                     tableModel.setResults(results);
                     long flagged = results.stream().filter(SimilarityResult::isFlagged).count();
                     setBusy(false, String.format(Locale.ROOT,
-                            "%d pair(s) compared, %d flagged for review. Method: PROPOSED (%d-token groups, flag at %.0f%%). "
+                            "%d pair(s) compared, %d flagged for review. Method: %d-token groups, flag at %.0f%%. "
                                     + "A flag is not a finding of plagiarism.",
                             results.size(), flagged, service.getChecker().getGramSize(),
                             service.getChecker().getThresholdPercent()));

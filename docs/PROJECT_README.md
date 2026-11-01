@@ -11,8 +11,8 @@ Week 1 of the plan in Check-In 1 (planning and design).
 | Part | State |
 |---|---|
 | `Main`, `CodeFile`, `FileReader`, `Logger`, `SimilarityResult` | Done and tested |
-| `CodeProcessor`, `CodeTokenizer` | Implemented, with unit tests. Normalisation and token rules are PROPOSED (see class Javadoc) |
-| `SimilarityChecker` | Implemented, with unit tests. Formula (Jaccard on 3-token groups) and 70% flag threshold are PROPOSED, to be tuned and approved by the group |
+| `CodeProcessor`, `CodeTokenizer` | Implemented, with unit tests. Normalisation and token rules approved by the group (see class Javadoc) |
+| `SimilarityChecker` | Implemented, with unit tests. Formula (Jaccard on 3-token groups) and 70% flag threshold approved by the group on 1 Nov 2026 |
 | `CLI` | Implemented (text menu, `--cli`), with tests |
 | `GUI` (Swing) | Implemented (`--gui`): add files/folder, compare, sortable results, matching parts, export. Needs a manual check on each machine |
 | `ReportGenerator` (TXT/CSV) | Implemented, with tests |
@@ -20,7 +20,7 @@ Week 1 of the plan in Check-In 1 (planning and design).
 | `ResultStore`, GUI Save/Load results (serialization) | Implemented, with tests |
 | Parallel comparison (`compareAll(..., threads)`) and `Benchmark` | Implemented, with tests. Timings on your own machine still to be recorded |
 
-All planned classes are now implemented. The similarity method and threshold are still PROPOSED and need group approval.
+All planned classes are now implemented. The similarity method and threshold were approved by the group on 1 Nov 2026.
 
 Run options: `--gui` opens the window, `--cli` opens the text menu, and a file or folder argument prints a similarity table.
 
@@ -52,7 +52,7 @@ src/main/java/plagiarismchecker/
     FileReader                 reads and validates files, scans folders recursively
     CodeProcessor              removes comments, normalises formatting
     CodeTokenizer              turns code into comparable tokens
-    SimilarityChecker          compares tokens, calculates similarity (proposed method)
+    SimilarityChecker          compares tokens, calculates similarity
     SimilarityResult           files compared, percentage, matches, flag
     ReportGenerator            TXT/CSV report
     Logger                     events, warnings, errors

@@ -18,27 +18,9 @@ method on it exists in `src/main/java/plagiarismchecker/`.
 | Output | `ReportGenerator` (TXT, CSV), `ResultStore` (save and load) |
 | Support | `Logger`, `Pair<A,B>`, `RankedList<T>` |
 
-**Check-In 1 design compared with the code.** The Check-In 1 design (10 classes) was sound and the code follows
-it. The same 10 classes exist and the main flow is unchanged. The differences below are refactoring decisions
-made while building, and the diagram above is the updated version.
-
-| Check-In 1 design | Code now | Why it changed |
-|---|---|---|
-| `CodeProcessor.tokenise()` | New `CodeTokenizer` class | One class, one job: `CodeProcessor` cleans the code, `CodeTokenizer` splits it. |
-| `CodeFile` stores `tokens` | Tokens are computed when needed | Keeps `CodeFile` small and unchangeable. |
-| `FileReader.validate(File)` | `InvalidSourceFileException` | A bad file is reported with a clear error, not a true/false check. |
-| `CodeProcessor.removeComments()` | `stripComments()` and `normalise()` | Comments, imports and names are cleaned in one step. |
-| `calculateSimilarity()` | `compare(...)` and `compareAll(...)` | The comparison is one method, with a parallel version. |
-| `getPercentage()` | `getSimilarityPercent()` | Renamed, same meaning. |
-| `logInfo`, `logWarning`, `logError` | `info`, `warn`, `error` | Renamed, same meaning. |
-| `generateReport()`, `saveReport()` | `writeReport()`, `toText()`, `toCsv()` | Text and CSV output are separate. |
-| CLI holds a reader and a checker | CLI holds `ComparisonService` and `ReportGenerator` | The service coordinates the pipeline, so the CLI stays thin. |
-| Not in design | `ComparisonService` | Ties reader, processor, tokenizer and checker together. |
-| Not in design | `Pair<A,B>`, `RankedList<T>`, `ResultStore` | Generics, a custom data structure and serialization from the syllabus. |
-| Not in design | `SimilarityResult.matchingFragments` | Shows a reviewer which parts matched. |
-
-Say in the demo: "Our design held up. We split tokenising out, added a service, and added the generic and
-serialization classes the course requires." The refactor is also a good answer for Challenges faced.
+**Check this against the Check-In 1 UML before presenting.** Classes that are probably newer than that diagram
+(compare and confirm): `CodeTokenizer`, `ComparisonService`, `ResultStore`, `RankedList`, `Pair`. If the
+Check-In 1 diagram differs, say so in the demo and show this one as the updated version.
 The Swing `GUI` and `ResultsTableModel` exist but are left out of this diagram, since this stage is console only.
 
 ## 2. Live console demo (about 3 minutes)
@@ -69,7 +51,7 @@ usage text; a wrong path (`Main nothing-here`) prints "File does not exist" and 
 `logs\plagiarism-checker.log`.
 
 Always say: **a flag only marks a pair for a person to review. It is not a finding of plagiarism.** The
-similarity method (3-token groups, Jaccard, 70% flag) is PROPOSED until the group approves it.
+similarity method (3-token groups, Jaccard, 70% flag) was approved by the group on 1 Nov 2026.
 
 ## 3. Core features checklist (the 40-50% target)
 
@@ -81,8 +63,8 @@ similarity method (3-token groups, Jaccard, 70% flag) is PROPOSED until the grou
 | Custom exception for bad input | Done |
 | Normalise code (strip comments, imports, whitespace) | Done |
 | Tokenise code (identifiers, numbers and strings generalised) | Done |
-| Similarity score for a pair, with matching fragments | Done (method PROPOSED) |
-| Compare every pair, rank, flag at a threshold | Done (70% PROPOSED) |
+| Similarity score for a pair, with matching fragments | Done (method approved) |
+| Compare every pair, rank, flag at a threshold | Done (70% approved) |
 | Console menu (add, view, compare, results, report, exit) | Done |
 | Report to TXT or CSV | Done |
 | Save and load results (serialization) | Done |

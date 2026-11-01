@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Splits normalised code into comparable tokens.
  *
- * <p>Token rules (PROPOSED, to be confirmed by the group after testing):</p>
+ * <p>Token rules (approved by the group on 1 Nov 2026):</p>
  * <ul>
  *   <li>Java keywords and {@code true}/{@code false}/{@code null} are kept as written.</li>
  *   <li>Every other identifier (variable, method, class name) becomes {@code ID}, so

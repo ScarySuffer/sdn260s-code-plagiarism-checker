@@ -7,7 +7,7 @@ import java.util.List;
  * Prepares source code for comparison by removing comments and reducing formatting
  * differences, while keeping the structure of the code.
  *
- * <p>Rules (PROPOSED, to be confirmed by the group after testing):</p>
+ * <p>Rules (approved by the group on 1 Nov 2026):</p>
  * <ul>
  *   <li>Line comments and block comments are removed.
  *       Comment markers inside string or character literals are left alone.</li>

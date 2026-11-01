@@ -14,7 +14,7 @@ import java.util.concurrent.Future;
 /**
  * Compares tokenised code and calculates a similarity percentage.
  *
- * <p>Method (PROPOSED, to be confirmed by the group after testing): each file's tokens
+ * <p>Method (approved by the group on 1 Nov 2026): each file's tokens
  * are turned into a set of overlapping {@code n}-token groups (n-grams, default n = 3).
  * The similarity is the Jaccard index of the two sets:
  * {@code |A and B| / |A or B| x 100}. A pair is flagged for human review when the
@@ -25,9 +25,9 @@ import java.util.concurrent.Future;
  */
 public class SimilarityChecker {
 
-    /** Proposed default n-gram size. */
+    /** Default n-gram size. */
     public static final int DEFAULT_GRAM_SIZE = 3;
-    /** Proposed default flag threshold, in percent. */
+    /** Default flag threshold, in percent. */
     public static final double DEFAULT_THRESHOLD_PERCENT = 70.0;
 
     private final int gramSize;

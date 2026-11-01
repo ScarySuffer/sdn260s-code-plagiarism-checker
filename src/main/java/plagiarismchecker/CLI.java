@@ -118,7 +118,7 @@ public class CLI {
             out.println("No results yet. Run Compare first.");
             return;
         }
-        out.printf(Locale.ROOT, "Similarity (proposed method: %d-token groups, flag at %.0f%%)%n",
+        out.printf(Locale.ROOT, "Similarity (method: %d-token groups, flag at %.0f%%)%n",
                 service.getChecker().getGramSize(), service.getChecker().getThresholdPercent());
         for (SimilarityResult r : results) {
             out.println("  " + r);

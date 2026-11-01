@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Evaluation on the MOCK submissions in samples/mock (invented, not real students).
- * It records how the PROPOSED method behaves on pairs whose relationship we built on
+ * It records how the approved method behaves on pairs whose relationship we built on
  * purpose. If the method or threshold changes, update the expectations deliberately.
  */
 class MockSamplesTest {

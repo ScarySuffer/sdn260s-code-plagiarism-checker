@@ -10,7 +10,7 @@ import java.util.Locale;
  * Starts the application and connects the main components.
  *
  * <p>At this stage it loads the files or folders given as arguments, lists them and, when
- * there are two or more, prints a similarity table (PROPOSED method, see
+ * there are two or more, prints a similarity table (method approved by the group, see
  * {@link SimilarityChecker}). With {@code --gui} it opens the Swing window and with {@code --cli} the text menu.</p>
  */
 public class Main {
@@ -74,7 +74,7 @@ public class Main {
         SimilarityChecker checker = service.getChecker();
         List<SimilarityResult> results = service.compare(files);
         out.println();
-        out.printf(Locale.ROOT, "Similarity (proposed method: %d-token groups, flag at %.0f%%)%n",
+        out.printf(Locale.ROOT, "Similarity (method: %d-token groups, flag at %.0f%%)%n",
                 checker.getGramSize(), checker.getThresholdPercent());
         for (SimilarityResult result : results) {
             out.println("  " + result);

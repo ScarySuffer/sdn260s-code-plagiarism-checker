@@ -1,0 +1,2 @@
+Lecturer notes: mark Assignment 2 by Friday.
+This is a plain text file, not Java source code.
