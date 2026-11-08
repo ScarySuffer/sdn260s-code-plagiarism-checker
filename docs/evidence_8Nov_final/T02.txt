@@ -1,0 +1,15 @@
+========================================
+       CODE PLAGIARISM CHECKER
+========================================
+2026-11-08 21:26:52 [INFO] Loaded Student_A.java (19 lines)
+2026-11-08 21:26:53 [INFO] Loaded Student_B.java (20 lines)
+2026-11-08 21:26:53 [INFO] Scanned test_datasets/T02_similar_programs: found 2 source file(s).
+Loaded 2 file(s):
+  1. Student_A.java (19 lines)
+  2. Student_B.java (20 lines)
+2026-11-08 21:26:53 [INFO] Compared 2 file(s): 1 pair(s), 1 flagged for review (2 thread(s)); elapsed 9.898 ms.
+
+Similarity (method: 3-token groups, flag at 70%)
+  Student_A.java <-> Student_B.java: 91.3% (flagged for review)
+A flag only marks a pair for a person to review. It is not a finding of plagiarism.
+exit=0 ms=395

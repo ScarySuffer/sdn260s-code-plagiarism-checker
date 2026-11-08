@@ -1,0 +1,15 @@
+========================================
+       CODE PLAGIARISM CHECKER
+========================================
+2026-11-08 21:26:55 [INFO] Loaded Large_A.java (1307 lines)
+2026-11-08 21:26:55 [INFO] Loaded Large_B.java (1287 lines)
+2026-11-08 21:26:55 [INFO] Scanned test_datasets/T08_large_file: found 2 source file(s).
+Loaded 2 file(s):
+  1. Large_A.java (1307 lines)
+  2. Large_B.java (1287 lines)
+2026-11-08 21:26:56 [INFO] Compared 2 file(s): 1 pair(s), 1 flagged for review (2 thread(s)); elapsed 37.836 ms.
+
+Similarity (method: 3-token groups, flag at 70%)
+  Large_A.java <-> Large_B.java: 86.2% (flagged for review)
+A flag only marks a pair for a person to review. It is not a finding of plagiarism.
+exit=0 ms=426

@@ -1,0 +1,11 @@
+========================================
+       CODE PLAGIARISM CHECKER
+========================================
+2026-11-08 21:26:54 [WARN] Skipped test_datasets/T04_empty_file/Blank_Lines.java: File is empty: Blank_Lines.java
+2026-11-08 21:26:54 [WARN] Skipped test_datasets/T04_empty_file/Empty.java: File is empty: Empty.java
+2026-11-08 21:26:54 [INFO] Loaded Student_A.java (12 lines)
+2026-11-08 21:26:54 [INFO] Scanned test_datasets/T04_empty_file: found 1 source file(s).
+Loaded 1 file(s):
+  1. Student_A.java (12 lines)
+Add at least two files to compare them.
+exit=0 ms=363

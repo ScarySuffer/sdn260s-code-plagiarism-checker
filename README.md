@@ -276,7 +276,7 @@ The UML class diagram is in `docs/`.
 
 **Mock data.** `samples/mock/` holds eleven invented submissions with relationships built in on purpose (renamed copies, a reordered copy, a partial copy, independent solutions, unrelated programs). `expected.csv` lists what each pair was meant to be. It is the intention, not a measured result.
 
-**Test datasets and the test log.** `test_datasets/` holds nine small folders (T01 to T09) with known relationships between the files, such as a renamed copy, identical files, an empty file and a wrong file type. Its own README gives the expected result for each. The 13 tests built on them (T-01 to T-13) are recorded in the Test Log workbook. On the final build 11 passed and 2 failed; the failures are the two problems listed in the limitations below.
+**Test datasets and the test log.** `test_datasets/` holds nine small folders (T01 to T09) with known relationships between the files, such as a renamed copy, identical files, an empty file and a wrong file type. Its own README gives the expected result for each. The 13 tests built on them (T-01 to T-13) are recorded in the Test Log workbook. On the first final build (1 Nov) 11 passed and 2 failed. After the fixes, all 13 were repeated on the build of 8 Nov and all 13 passed (T-01 to T-12 in a scripted run, T-13 by hand on a computer). The transcripts are in `docs/evidence_8Nov_final/`.
 
 **Speed check.** `java -cp target/classes plagiarismchecker.Benchmark` generates files and times the comparison on one thread and on several. The numbers depend on your computer, and extra threads only help if it has more than one processor core.
 

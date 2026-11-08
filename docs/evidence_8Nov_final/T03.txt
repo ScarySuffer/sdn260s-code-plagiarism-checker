@@ -1,0 +1,30 @@
+========================================
+       CODE PLAGIARISM CHECKER
+========================================
+2026-11-08 21:26:53 [INFO] Loaded Student_A.java (19 lines)
+2026-11-08 21:26:53 [INFO] Loaded Student_B.java (20 lines)
+2026-11-08 21:26:53 [INFO] Loaded Student_C.java (22 lines)
+2026-11-08 21:26:53 [INFO] Loaded Student_D.java (34 lines)
+2026-11-08 21:26:53 [INFO] Loaded Student_E.java (16 lines)
+2026-11-08 21:26:53 [INFO] Scanned test_datasets/T03_multiple_submissions: found 5 source file(s).
+Loaded 5 file(s):
+  1. Student_A.java (19 lines)
+  2. Student_B.java (20 lines)
+  3. Student_C.java (22 lines)
+  4. Student_D.java (34 lines)
+  5. Student_E.java (16 lines)
+2026-11-08 21:26:53 [INFO] Compared 5 file(s): 10 pair(s), 1 flagged for review (2 thread(s)); elapsed 19.535 ms.
+
+Similarity (method: 3-token groups, flag at 70%)
+  Student_A.java <-> Student_B.java: 91.3% (flagged for review)
+  Student_B.java <-> Student_E.java: 29.0%
+  Student_A.java <-> Student_E.java: 27.9%
+  Student_C.java <-> Student_E.java: 24.8%
+  Student_A.java <-> Student_C.java: 23.8%
+  Student_B.java <-> Student_C.java: 23.1%
+  Student_C.java <-> Student_D.java: 22.0%
+  Student_D.java <-> Student_E.java: 21.8%
+  Student_B.java <-> Student_D.java: 15.9%
+  Student_A.java <-> Student_D.java: 15.6%
+A flag only marks a pair for a person to review. It is not a finding of plagiarism.
+exit=0 ms=822

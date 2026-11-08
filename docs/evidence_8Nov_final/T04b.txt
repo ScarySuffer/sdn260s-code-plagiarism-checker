@@ -1,0 +1,9 @@
+========================================
+       CODE PLAGIARISM CHECKER
+========================================
+2026-11-08 21:26:56 [ERROR] File is empty: Empty.java
+2026-11-08 21:26:56 [INFO] Loaded Student_A.java (12 lines)
+Loaded 1 file(s):
+  1. Student_A.java (12 lines)
+Add at least two files to compare them.
+exit=0 ms=92

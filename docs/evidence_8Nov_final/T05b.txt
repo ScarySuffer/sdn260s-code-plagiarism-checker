@@ -1,0 +1,8 @@
+========================================
+       CODE PLAGIARISM CHECKER
+========================================
+2026-11-08 21:26:56 [ERROR] Only .java files can be checked: notes.txt
+2026-11-08 21:26:56 [ERROR] Only .java files can be checked: results.csv
+2026-11-08 21:26:56 [ERROR] Only .java files can be checked: Student_C.jav
+No usable source files were loaded. See the messages above.
+exit=1 ms=88

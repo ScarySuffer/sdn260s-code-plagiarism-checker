@@ -1,0 +1,18 @@
+========================================
+       CODE PLAGIARISM CHECKER
+========================================
+2026-11-08 21:26:54 [INFO] Loaded Student_A.java (12 lines)
+2026-11-08 21:26:54 [INFO] Loaded Student_B.java (22 lines)
+2026-11-08 21:26:54 [INFO] Skipped (not a .java file): test_datasets/T05_invalid_file/Student_C.jav
+2026-11-08 21:26:54 [INFO] Skipped (not a .java file): test_datasets/T05_invalid_file/notes.txt
+2026-11-08 21:26:54 [INFO] Skipped (not a .java file): test_datasets/T05_invalid_file/results.csv
+2026-11-08 21:26:54 [INFO] Scanned test_datasets/T05_invalid_file: found 2 source file(s).
+Loaded 2 file(s):
+  1. Student_A.java (12 lines)
+  2. Student_B.java (22 lines)
+2026-11-08 21:26:54 [INFO] Compared 2 file(s): 1 pair(s), 0 flagged for review (2 thread(s)); elapsed 7.623 ms.
+
+Similarity (method: 3-token groups, flag at 70%)
+  Student_A.java <-> Student_B.java: 20.0%
+A flag only marks a pair for a person to review. It is not a finding of plagiarism.
+exit=0 ms=388

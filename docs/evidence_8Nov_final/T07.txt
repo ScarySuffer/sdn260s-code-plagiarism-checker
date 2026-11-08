@@ -1,0 +1,20 @@
+========================================
+       CODE PLAGIARISM CHECKER
+========================================
+2026-11-08 21:26:55 [INFO] Loaded Only_Comments.java (3 lines)
+2026-11-08 21:26:55 [INFO] Loaded Tiny_A.java (1 lines)
+2026-11-08 21:26:55 [INFO] Loaded Tiny_B.java (1 lines)
+2026-11-08 21:26:55 [INFO] Scanned test_datasets/T07_very_small_file: found 3 source file(s).
+Loaded 3 file(s):
+  1. Only_Comments.java (3 lines)
+  2. Tiny_A.java (1 lines)
+  3. Tiny_B.java (1 lines)
+2026-11-08 21:26:55 [WARN] No code to compare in Only_Comments.java (only comments or blank lines); it scores 0.0%.
+2026-11-08 21:26:55 [INFO] Compared 3 file(s): 3 pair(s), 0 flagged for review (2 thread(s)); elapsed 9.067 ms.
+
+Similarity (method: 3-token groups, flag at 70%)
+  Tiny_A.java <-> Tiny_B.java: 8.3%
+  Only_Comments.java <-> Tiny_A.java: 0.0%
+  Only_Comments.java <-> Tiny_B.java: 0.0%
+A flag only marks a pair for a person to review. It is not a finding of plagiarism.
+exit=0 ms=527
