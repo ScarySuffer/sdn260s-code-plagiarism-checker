@@ -16,23 +16,23 @@ Symbols: **n** = number of files, **t** = tokens in one file (about the same for
 
 The n² term is the important one: doubling the number of files makes the comparison about four times slower.
 
-## Measured (generated files, about 120 statements each)
+## Measured (real runs)
 
-These numbers were measured in the assistant's 2-processor test environment, not on a group
-member's computer. Run `Benchmark` on your own machine and replace this table with your
-results before they go in the report.
+Measured on 8 Nov 2026 by running the project's code: OpenJDK 21, `--release 11`, a machine with
+2 processors (not a student laptop), 2 warm-up runs, then the median of 5 runs. The full table,
+including the real test datasets, is in `REAL_EXECUTION_TIME_BENCHMARK.md`.
 
 | Files | Pairs | 1 thread (ms) | 2 threads (ms) | Speed-up |
 |---|---|---|---|---|
-| 10 | 45 | 36.0 | 29.9 | 1.21x |
-| 20 | 190 | 93.2 | 50.4 | 1.85x |
-| 40 | 780 | 334.7 | 190.7 | 1.75x |
-| 80 | 3160 | 1397.2 | 790.0 | 1.77x |
-| 160 | 12720 | 5518.0 | 3109.4 | 1.77x |
+| 10 | 45 | 22.8 | 20.5 | 1.11x |
+| 20 | 190 | 61.3 | 38.1 | 1.61x |
+| 40 | 780 | 242.4 | 122.4 | 1.98x |
+| 80 | 3160 | 904.4 | 574.8 | 1.57x |
 
-Reading the table: from 40 to 80 to 160 files the single-thread time grows 4.2x then 3.9x, which
-matches O(n²). Two threads give roughly 1.8x. The small case (10 files) gains little because the
-thread start-up time is comparable to the work.
+Reading the table: from 20 to 40 files the single-thread time grows about 4x (61.3 to 242.4 ms),
+which matches O(n²). Two threads give roughly 1.6x to 2x on larger inputs. For tiny inputs (one
+pair of files) two threads gain nothing, because starting the threads costs about as much as the
+work. Timings depend on the machine, so a computer with more cores will give a different speed-up.
 
 ## Why it matters for the course (GA7)
 

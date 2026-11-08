@@ -207,10 +207,11 @@ public class GUI {
             paths.add(f.toPath());
         }
         setBusy(true, "Loading...");
+        List<String> rejected = java.util.Collections.synchronizedList(new ArrayList<>());
         new SwingWorker<List<CodeFile>, Void>() {
             @Override
             protected List<CodeFile> doInBackground() {
-                return service.load(paths);
+                return service.load(paths, rejected::add);
             }
 
             @Override
@@ -221,9 +222,26 @@ public class GUI {
                     files.clear();
                     files.addAll(merged);
                     refreshFileList();
-                    setBusy(false, files.isEmpty()
+                    String status = files.isEmpty()
                             ? "No usable .java files were found."
-                            : "Loaded " + files.size() + " file(s). Press Compare.");
+                            : "Loaded " + files.size() + " file(s). Press Compare.";
+                    if (!rejected.isEmpty()) {
+                        status += " " + rejected.size() + " file(s) skipped.";
+                    }
+                    setBusy(false, status);
+                    if (!rejected.isEmpty()) {
+                        StringBuilder text = new StringBuilder("These files were skipped:\n");
+                        int shown = 0;
+                        for (String reason : new ArrayList<>(rejected)) {
+                            if (shown++ == 10) {
+                                text.append("... and ").append(rejected.size() - 10).append(" more (see the log).\n");
+                                break;
+                            }
+                            text.append(" - ").append(reason).append('\n');
+                        }
+                        JOptionPane.showMessageDialog(frame, text.toString(), "Files skipped",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
                 } catch (InterruptedException | ExecutionException e) {
                     fail("Could not load files", e);
                 }
@@ -233,11 +251,19 @@ public class GUI {
 
     private void compare() {
         if (files.size() < 2) {
-            JOptionPane.showMessageDialog(frame, "Add at least two .java files to compare.",
+            JOptionPane.showMessageDialog(frame,
+                    "Nothing to compare: add at least two usable .java files. Files that could not be\nread are skipped and the reason is recorded in the log.",
                     "Nothing to compare", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         List<CodeFile> snapshot = new ArrayList<>(files);
+        List<String> noCode = service.filesWithNoCode(snapshot);
+        if (!noCode.isEmpty()) {
+            JOptionPane.showMessageDialog(frame,
+                    "These files have no code left after comments are removed, so they score 0.0%:\n"
+                            + String.join("\n", noCode),
+                    "No code to compare", JOptionPane.WARNING_MESSAGE);
+        }
         setBusy(true, "Comparing...");
         new SwingWorker<List<SimilarityResult>, Void>() {
             @Override
@@ -252,9 +278,9 @@ public class GUI {
                     tableModel.setResults(results);
                     long flagged = results.stream().filter(SimilarityResult::isFlagged).count();
                     setBusy(false, String.format(Locale.ROOT,
-                            "%d pair(s) compared, %d flagged for review. Method: %d-token groups, flag at %.0f%%. "
+                            "%d pair(s) compared in %d ms, %d flagged for review. Method: %d-token groups, flag at %.0f%%. "
                                     + "A flag is not a finding of plagiarism.",
-                            results.size(), flagged, service.getChecker().getGramSize(),
+                            results.size(), service.getLastComparisonMillis(), flagged, service.getChecker().getGramSize(),
                             service.getChecker().getThresholdPercent()));
                     if (!results.isEmpty()) {
                         table.setRowSelectionInterval(0, 0);

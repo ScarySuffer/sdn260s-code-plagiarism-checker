@@ -88,7 +88,19 @@ public class CLI {
             return;
         }
         Set<CodeFile> merged = new LinkedHashSet<>(files);
-        merged.addAll(service.load(List.of(Path.of(line.trim()))));
+        String pathInput = line.trim();
+        // A path pasted with quotation marks (common on Windows) is accepted without them.
+        if (pathInput.length() >= 2
+                && ((pathInput.startsWith("\"") && pathInput.endsWith("\""))
+                || (pathInput.startsWith("'") && pathInput.endsWith("'")))) {
+            pathInput = pathInput.substring(1, pathInput.length() - 1);
+        }
+        try {
+            merged.addAll(service.load(List.of(Path.of(pathInput)), message -> out.println("[WARN] " + message)));
+        } catch (java.nio.file.InvalidPathException e) {
+            out.println("[ERROR] Invalid path: " + pathInput + " (" + e.getReason() + ")");
+            return;
+        }
         files.clear();
         files.addAll(merged);
         out.println(files.size() + " file(s) loaded in total.");
@@ -109,8 +121,13 @@ public class CLI {
             out.println("Load at least two files first.");
             return;
         }
+        for (String name : service.filesWithNoCode(files)) {
+            out.println("[WARN] No code to compare in " + name
+                    + " (only comments or blank lines). It will score 0.0%.");
+        }
         results = service.compare(files);
-        out.println("Compared " + results.size() + " pair(s). Choose 4 to view them.");
+        out.printf(Locale.ROOT, "Compared %d pair(s) in %d ms. Choose 4 to view them.%n",
+                results.size(), service.getLastComparisonMillis());
     }
 
     private void viewResults() {

@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -75,6 +76,15 @@ public class FileReader {
      * @throws InvalidSourceFileException if the folder itself does not exist or is not a folder
      */
     public List<CodeFile> scanFolder(Path folder) throws InvalidSourceFileException {
+        return scanFolder(folder, message -> { });
+    }
+
+    /**
+     * Same as {@link #scanFolder(Path)}, but every file that is skipped is also reported to
+     * {@code rejectionHandler} with the reason, so the menu and the window can show it.
+     */
+    public List<CodeFile> scanFolder(Path folder, Consumer<String> rejectionHandler)
+            throws InvalidSourceFileException {
         if (folder == null || !Files.exists(folder)) {
             throw new InvalidSourceFileException("Folder does not exist: " + folder, folder);
         }
@@ -83,13 +93,13 @@ public class FileReader {
         }
 
         List<CodeFile> found = new ArrayList<>();
-        scanRecursively(folder, found);
+        scanRecursively(folder, found, rejectionHandler);
         logger.info("Scanned " + folder + ": found " + found.size() + " source file(s).");
         return found;
     }
 
     /** Recursion: each sub-folder is scanned by calling this method again. */
-    private void scanRecursively(Path folder, List<CodeFile> found) {
+    private void scanRecursively(Path folder, List<CodeFile> found, Consumer<String> rejectionHandler) {
         List<Path> entries;
         try (Stream<Path> stream = Files.list(folder)) {
             entries = stream.sorted().collect(Collectors.toList());
@@ -102,13 +112,17 @@ public class FileReader {
             if (Files.isSymbolicLink(entry)) {
                 logger.warn("Skipped symbolic link: " + entry); // avoids loops
             } else if (Files.isDirectory(entry)) {
-                scanRecursively(entry, found);
+                scanRecursively(entry, found, rejectionHandler);
             } else if (hasJavaExtension(entry)) {
                 try {
                     found.add(readFile(entry));
                 } catch (InvalidSourceFileException e) {
                     logger.warn("Skipped " + entry + ": " + e.getMessage());
+                    rejectionHandler.accept("File rejected: " + entry + ": " + e.getMessage());
                 }
+            } else {
+                logger.info("Skipped (not a .java file): " + entry);
+                rejectionHandler.accept("Skipped (not a .java file): " + entry);
             }
         }
     }

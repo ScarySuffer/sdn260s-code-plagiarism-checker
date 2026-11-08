@@ -206,7 +206,7 @@ The group size (3) and the threshold (70%) were approved by the group on 1 Novem
 - **Text report** (`.txt`, or any name that does not end in `.csv`): a header, the number of pairs and flags, then every pair with up to 10 matching fragments shown.
 - **CSV report** (`.csv`): one row per pair with the columns File A, File B, Similarity (%), Flagged for review, Matching fragments. It opens in Excel.
 - **Saved results** (`.g8`, GUI only): a binary file made with Java serialization. Loading only accepts this program's own classes. A file from somewhere else is refused with a readable message.
-- **Log** (`logs/plagiarism-checker.log` in the folder you ran from): one timestamped line per event, tagged INFO, WARN or ERROR. It records every file loaded, every file skipped and why, and every comparison. When you give files or folders on the command line, the same lines are also printed on screen. In the text menu and in the window they are only in the log file, so look there if a file you added did not load.
+- **Log** (`logs/plagiarism-checker.log` in the folder you ran from): one timestamped line per event, tagged INFO, WARN or ERROR. It records every file loaded, every file skipped and why, and every comparison. When you give files or folders on the command line, the same lines are also printed on screen. In the text menu a skipped file is also shown on screen with its reason, and the window lists the skipped files in a message box. The log file keeps the full record.
 
 ## 8. How it handles bad input
 
@@ -224,10 +224,10 @@ A bad file never stops a run. It is skipped, the reason is logged, and the other
 | Same file added twice | Counted once |
 | Symbolic link inside a folder | Skipped with a WARN (avoids loops) |
 | Only one file loaded | "Add at least two files to compare them." |
-| Only comments or imports in a file | Loads, but has nothing to compare, so scores 0.0% against everything |
+| Only comments or imports in a file | Loads, but has nothing to compare, so it scores 0.0%. A "No code to compare" warning is shown (menu, window) and logged |
 | Report or results file cannot be written | Error message, program keeps running |
 
-On the command line each of these messages shows on screen as `[ERROR]` or `[WARN]`. In the text menu you only see "0 file(s) loaded in total" and in the window "No usable .java files were found"; the reason is in `logs/plagiarism-checker.log`. When a folder is scanned, files that do not end in `.java` are skipped without any message.
+On the command line each of these messages shows on screen as `[ERROR]` or `[WARN]`. In the text menu each skipped file is shown on screen as `[WARN]` with its reason, and the window lists them in a message box. When a folder is scanned, files that do not end in `.java` are also reported as skipped. The comparison also reports how long it took, in milliseconds.
 
 ## 9. The classes
 
@@ -288,9 +288,7 @@ The UML class diagram is in `docs/`.
 - Short programs score each other higher than you might expect, because they share ordinary code.
 - Saving and loading results is available in the window only, not in the text menu.
 - It compares the files you give it. It does not search the internet or earlier years.
-- In the text menu and the window, the reason a file was rejected is only written to the log (the screen shows a short summary).
-- A path typed at the text menu that contains a character the system does not allow stops the menu with an error. On Windows this includes quotation marks, so type or paste paths without quotes.
-- A file that contains only comments and imports loads but scores 0.0% against everything, without a message.
+- A path typed at the text menu that contains a character the system does not allow gets an "Invalid path" message. Paths pasted with quotation marks are accepted.
 - The method (3-token groups, Jaccard similarity, 70% threshold) was approved by the group on 1 November 2026. So far it has only been tried on invented and generated files, not on real student work.
 
 ## 12. Troubleshooting
@@ -300,7 +298,7 @@ The UML class diagram is in `docs/`.
 | `'javac' is not recognized` | Install a JDK (not just a JRE) and reopen the terminal. |
 | Could not find or load main class `plagiarismchecker.Main` | Compile first, and run from the folder that contains `target`. Check the `-cp` path. |
 | No usable source files were loaded | Check the path, quote it if it has spaces, and make sure the files end in `.java`. |
-| The menu stops with a long Java error after you typed a path | Type the path without quotation marks and without unusual characters, then start the menu again. |
+| The menu says "Invalid path" | The path contains a character your system does not allow. Check it and type it again. |
 | A file does not show up in the list | Look in `logs/plagiarism-checker.log` for the reason. |
 | Window does not open | `--gui` must be the only argument. On a remote or headless machine there is no screen to show it on. |
 | `mvn` not found | Install Maven, or use the manual `javac` commands in section 4. |

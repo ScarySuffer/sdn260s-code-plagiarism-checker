@@ -1,4 +1,4 @@
-package plagiarismchecker;
+    package plagiarismchecker;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
